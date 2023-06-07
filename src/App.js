@@ -1,23 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import "./css/app.css";
+import { useState, useEffect } from "react";
+import { fetchData } from "./apiCall";
+import Main from "./components/Main";
+import Footer from "./components/Footer";
 
 function App() {
+  const [songs, setSongs] = useState([]);
+
+  useEffect(() => {
+    fetchData(setSongs);
+  }, []);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+      <header className="header">
+        <h1>Top Pop</h1>
       </header>
+
+      <Main songs={songs} />
+      <Footer />
     </div>
   );
 }
